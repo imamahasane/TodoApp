@@ -1,9 +1,14 @@
 import React from 'react';
 
-import style from './todo.module.css'
+import style from './todo.module.css';
 
 const Todo = (props) => {
-  const { title, desc, id } = props.todo;
+  const { title, desc } = props.todo;
+  const { id } = props;
+
+  const handleClick = (id) => {
+    props.onRemoveTodo(id);
+  };
 
   return (
     <article className={style.todo}>
@@ -13,8 +18,13 @@ const Todo = (props) => {
       </div>
 
       <div>
-        <button className={style.btn}>
-          <i className='fa fa-trash fa-2x'></i>
+        <button
+          className={style.btn}
+          onClick={() => {
+            handleClick(id);
+          }}
+        >
+          <i className="fa fa-trash fa-2x"></i>
         </button>
       </div>
     </article>

@@ -2,21 +2,22 @@ import React, { useState } from 'react';
 
 import style from './newtodo.module.css';
 
-const NewTodo = () => {
+const NewTodo = (props) => {
   const [todo, setTodo] = useState({ title: '', desc: '' });
 
   const { title, desc } = todo;
 
   const handleChange = (event) => {
     const name = event.target.name;
-
     setTodo((oldTodo) => {
-      return {...oldTodo, [name]: event.target.value}
-    })
-  }
+      return { ...oldTodo, [name]: event.target.value };
+    });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    props.onAddTodo(todo);
+    setTodo({ title: '', desc: '' });
   };
 
   return (
@@ -27,7 +28,6 @@ const NewTodo = () => {
           type="text"
           id="title"
           name="title"
-          id="title"
           value={title}
           onChange={handleChange}
         />
@@ -39,7 +39,6 @@ const NewTodo = () => {
           type="text"
           id="desc"
           name="desc"
-          id="desc"
           value={desc}
           onChange={handleChange}
         />
